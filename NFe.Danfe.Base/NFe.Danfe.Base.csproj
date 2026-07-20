@@ -15,6 +15,7 @@
     <None Remove="NFCe\NFCe.frx" />
     <None Remove="NFe\NFeEvento.frx" />
     <None Remove="NFe\NFeRetrato.frx" />
+    <None Remove="NFe\NFeSimplificado-Tipo2.frx" />
     <None Remove="NFe\NFeSimplificado.frx" />
   </ItemGroup>
 
@@ -26,6 +27,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NFe\NFeRetrato.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NFe\NFeSimplificado-Tipo2.frx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NFe\NFeSimplificado.frx">

@@ -325,6 +325,54 @@ namespace NFe.Danfe.AppTeste
                     Funcoes.Mensagem(ex.Message, "Erro", MessageBoxButton.OK);
             }
         }
+
+        private void ImprimirDanfeNfeSimplificadoTipo2()
+        {
+            try
+            {
+                #region Carrega um XML para a variável
+
+                var arquivoXml = Funcoes.BuscarArquivoXml();
+                if (string.IsNullOrEmpty(arquivoXml))
+                    return;
+
+                nfeProc nfeProc;
+                try // Tenta carregar NFeProc
+                {
+                    nfeProc = FuncoesXml.ArquivoXmlParaClasse<nfeProc>(arquivoXml);
+                }
+                catch (Exception)  // Carrega NFe sem protocolo
+                {
+                    NFe.Classes.NFe nfeContingenciaSemProc = FuncoesXml.ArquivoXmlParaClasse<NFe.Classes.NFe>(arquivoXml);
+                    nfeProc = new nfeProc() { NFe = nfeContingenciaSemProc };
+                }
+
+                if (nfeProc.NFe.infNFe.ide.mod != ModeloDocumento.NFe)
+                    throw new Exception("O XML informado não é um NFe!");
+
+                #endregion
+
+                #region Abre a visualização do relatório para impressão
+
+                var danfe = new DanfeFrNfe(proc: nfeProc, configuracaoDanfeNfe: _configuracoes.ConfiguracaoDanfeNfe, 
+                    arquivoRelatorio: @"NFe\NFeSimplificado-Tipo2.frx");
+                danfe.Visualizar();
+
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                if (!string.IsNullOrEmpty(ex.Message))
+                    Funcoes.Mensagem(ex.Message, "Erro", MessageBoxButton.OK);
+            }
+
+        }
+
+        private void BtnNfeSimplificadoTipo2_Click(object sender, RoutedEventArgs e)
+        {
+            ImprimirDanfeNfeSimplificadoTipo2();
+        }
     }
 
 }
